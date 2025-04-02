@@ -14,7 +14,7 @@ jobs:
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
       - name: Install Dependencies
-        run: brew install llvm gcc glfw
+        run: brew install glfw
 
       - name: Setup GO
         uses: actions/setup-go@v3
@@ -28,8 +28,8 @@ jobs:
 
       - name: Build macOS Binary
         run: |
-          GOARCH=amd64 go build -o InvoiceGatherer-amd64 .
-          GOARCH=arm64 go build -o InvoiceGatherer-arm64 .
+          CGO_ENABLED=1 GOARCH=amd64 go build -o InvoiceGatherer-amd64 .
+          CGO_ENABLED=1 GOARCH=arm64 go build -o InvoiceGatherer-arm64 .
           lipo -create -output InvoiceGatherer InvoiceGatherer-amd64 InvoiceGatherer-arm64
 
       - name: List directory contents
