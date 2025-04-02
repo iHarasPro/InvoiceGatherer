@@ -25,6 +25,9 @@ jobs:
           GOARCH=arm64 go build -o InvoiceGatherer-arm64 .
           lipo -create -output InvoiceGatherer InvoiceGatherer-amd64 InvoiceGatherer-arm64
 
+      - name: List directory contents
+        run: ls -alh
+
       - name: Upload macOS Build
         uses: actions/upload-artifact@v2
         with:
