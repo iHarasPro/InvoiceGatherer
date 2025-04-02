@@ -9,6 +9,11 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Install dependencies
+        run: |
+          xcode-select --install
+          brew install pkg-config glfw
+
       - name: Setup GO
         uses: actions/setup-go@v3
         with:
